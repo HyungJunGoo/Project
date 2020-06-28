@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-#include <curses.h>
+// #include <curses.h>
 #include <iomanip>
 
 using namespace std;
@@ -46,7 +46,8 @@ int main()
         cout << "\n \t\t\t 2. List   Records";
         cout << "\n \t\t\t 3. Modify Records";
         cout << "\n \t\t\t 4. Delete Records";
-        cout << "\n \t\t\t 5. Exit   Records";
+        cout << "\n \t\t\t 5. Search Records";
+        cout << "\n \t\t\t 6. Exit   Records";
         cout << "\n\n";
         cout << "\t\t\t Select Your Choice :=> ";
         fflush(stdin);
@@ -152,6 +153,30 @@ int main()
             break;
         
         case '5':
+            system("cls");
+            another = 'Y';
+            while(another == 'Y' || another == 'y'){
+                cout << "\n Enter the last name of the student to search : ";
+                cin >> xlast_name;
+                rewind(fp);
+                while(fread(&e, recsize, 1, fp) == 1)
+                {
+                    if(strcmp(e.last_name, xlast_name) == 0){
+                        cout << "First name : " << e.first_name;
+                        cout << "\nLast name : " << e.last_name;
+                        cout << "\nCourse : " << e.course;
+                        cout << "\nSection : " << e.section << endl;
+                    }
+                    else
+                        cout << "record not found";
+                }
+                system("pause");
+                cout << "\n Search Another Record (Y/N) ";
+                another = getchar();
+            }
+            break;
+
+        case '6':
             fclose(fp);
             cout << "\n\n";
             cout << "\t\t    THANK YOU FOR USING THIS PROGRAM   ";
